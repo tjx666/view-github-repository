@@ -10,14 +10,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:viewGithubRepository.viewRepositoryOfEditor",
+        "onCommand:viewGithubRepository.viewRepositoryOfActiveEditor",
         "onCommand:viewGithubRepository.viewRepositoryOfPackages"
     ],
     "main": "./out/src/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "viewGithubRepository.viewRepositoryOfEditor",
+                "command": "viewGithubRepository.viewRepositoryOfActiveEditor",
                 "title": "view github repository(active editor)"
             },
             {
@@ -36,6 +36,7 @@
     },
     "devDependencies": {
         "@types/glob": "^7.1.1",
+        "@types/lodash": "^4.14.149",
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.11.7",
         "@types/vscode": "^1.40.0",
@@ -69,6 +70,8 @@
         ]
     },
     "dependencies": {
+        "axios": "^0.19.0",
+        "lodash": "^4.17.15",
         "open": "^7.0.0"
     }
 }
