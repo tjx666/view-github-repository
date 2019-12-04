@@ -20,11 +20,19 @@
         "sourceType": "module"
     },
     "plugins": ["@typescript-eslint"],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+            }
+        }
+    },
     "rules": {
         "no-console": "off",
         "import/no-unresolved": ["warn", { "ignore": ["vscode"] }],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "prettier/prettier": "off"
     },
     "overrides": [
