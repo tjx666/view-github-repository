@@ -22,7 +22,10 @@
     "plugins": ["@typescript-eslint"],
     "rules": {
         "no-console": "off",
-        "import/no-unresolved": ["warn", { "ignore": ["vscode"] }]
+        "import/no-unresolved": ["warn", { "ignore": ["vscode"] }],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "prettier/prettier": "off"
     },
     "overrides": [
         {
