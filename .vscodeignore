@@ -16,3 +16,4 @@ vsc-extension-quickstart.md
 .eslintignore
 .prettierrc
 .editorconfig
+test/**
