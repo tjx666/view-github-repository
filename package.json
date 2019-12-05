@@ -2,7 +2,10 @@
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
     "description": "Open npm package GitHub repository straight from VScode",
+    "icon": "images/octocat.png",
+    "publisher": "YuTengjing",
     "version": "0.0.1",
+    "repository": "https://github.com/tjx666/view-github-repository",
     "engines": {
         "vscode": "^1.40.0"
     },
