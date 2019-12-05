@@ -10,18 +10,18 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:viewGithubRepository.viewRepositoryOfActiveEditor",
-        "onCommand:viewGithubRepository.viewRepositoryOfPackages"
+        "onCommand:viewGithubRepository.viewActiveEditorRepository",
+        "onCommand:viewGithubRepository.viewPackageJSONRepository"
     ],
     "main": "./out/src/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "viewGithubRepository.viewRepositoryOfActiveEditor",
+                "command": "viewGithubRepository.viewActiveEditorRepository",
                 "title": "view github repository(active editor)"
             },
             {
-                "command": "viewGithubRepository.viewRepositoryOfPackages",
+                "command": "viewGithubRepository.viewPackageJSONRepository",
                 "title": "view github repository(package.json)"
             }
         ]
@@ -71,6 +71,7 @@
     },
     "dependencies": {
         "axios": "^0.19.0",
+        "builtin-modules": "^3.1.0",
         "lodash": "^4.17.15",
         "open": "^7.0.0"
     }
