@@ -1,6 +1,7 @@
 # View GitHub Repository
 
-[![dependencies Status](https://david-dm.org/tjx666/view-github-repository/status.svg?style=flat-square)](https://david-dm.org/tjx666/view-github-repository) [![devDependencies Status](https://david-dm.org/tjx666/view-github-repository/dev-status.svg?style=flat-square)](https://david-dm.org/tjx666/view-github-repository?type=dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Version](https://vsmarketplacebadge.apphb.com/version-short/yutengjing.view-github-repository.svg)](https://marketplace.visualstudio.com/items?itemName=yutengjing.view-github-repository) [![Installs](https://vsmarketplacebadge.apphb.com/installs-short/yutengjing.view-github-repository.svg)](https://marketplace.visualstudio.com/items?itemName=yutengjing.view-github-repository) [![Downloads](https://vsmarketplacebadge.apphb.com/downloads-short/yutengjing.view-github-repository.svg)](https://marketplace.visualstudio.com/items?itemName=yutengjing.view-github-repository) [![Rating Star](https://vsmarketplacebadge.apphb.com/rating-star/yutengjing.view-github-repository.svg)](https://marketplace.visualstudio.com/items?itemName=yutengjing.view-github-repository) [![Trending Monthly](https://vsmarketplacebadge.apphb.com/trending-monthly/yutengjing.view-github-repository.svg)](https://marketplace.visualstudio.com/items?itemName=yutengjing.view-github-repository) [![dependencies Status](https://david-dm.org/tjx666/view-github-repository/status.svg)](https://david-dm.org/tjx666/view-github-repository) [![devDependencies Status](https://david-dm.org/tjx666/view-github-repository/dev-status.svg)](https://david-dm.org/tjx666/view-github-repository?type=dev)
+
 Open npm package GitHub repository straight from VSCode.
 
 ## Features
@@ -12,8 +13,8 @@ This extension provides two command:
 
 ## Usage
 
-1. navigate to the file where you import/require the package.
-2. Use shortcut `ctrl + shift + p` or `cmd + shift + p` on macOS to show command panel, input one of command above.
+1. navigate to the file where you import/require the npm packages.
+2. Use shortcut `ctrl + shift + p` or `cmd + shift + p` on macOS to show command panel, input one of commands you need listed above.
 
 ![view github repository of active editor](https://github.com/tjx666/view-github-repository/blob/master/images/activeEditor.gif?raw=true)
 
