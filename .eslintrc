@@ -5,11 +5,7 @@
         "node": true,
         "mocha": true
     },
-    "extends": [
-        "airbnb-base",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
-    ],
+    "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -28,12 +24,16 @@
         }
     },
     "rules": {
+        "prettier/prettier": "off",
+
         "no-console": "off",
+        "no-param-reassign": "off",
+
         "import/no-unresolved": ["warn", { "ignore": ["vscode"] }],
+
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "prettier/prettier": "off"
+        "@typescript-eslint/no-explicit-any": "off"
     },
     "overrides": [
         {
