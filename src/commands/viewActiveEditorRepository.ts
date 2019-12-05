@@ -16,6 +16,7 @@ const fetchNpmPackageRepository = async (moduleName: string): Promise<string | n
         resp = await axios.get(packageInfoURL.replace(':name', moduleName));
     } catch (error) {
         vscode.window.showErrorMessage(`Get module ${moduleName} info occur error, check your network!`);
+        console.error(error);
     }
 
     const repositoryURL: string | undefined = _.get(resp, 'data.collected.metadata.links.repository');
@@ -40,10 +41,10 @@ const viewGithubRepository = async (moduleName: string) => {
     }
 };
 
-const extractModuleNames = (textContent: string): string[] | null => {
-    const requireRegexp = /require\(("|')([a-zA-Z0-9-]*?)("|')\)/;
-    const importRegexp = /import\s+.*?('|")([a-zA-Z0-9-]*?)('|")/;
-    const exportRegexp = /export\s+.*?from\s+('|")([a-zA-Z0-9-]*?)('|")/;
+const extractModuleNames = (textContent: string): string[] => {
+    const requireRegexp = /require\(("|')([a-zA-Z0-9-._]*?)("|')\)/;
+    const importRegexp = /import\s+.*?('|")([a-zA-Z0-9-._]*?)('|")/;
+    const exportRegexp = /export\s+.*?from\s+('|")([a-zA-Z0-9-._]*?)('|")/;
     const importStatementRegexp = new RegExp(
         `${requireRegexp.source}|${importRegexp.source}|${exportRegexp.source}`,
         'g'
@@ -66,16 +67,45 @@ const extractModuleNames = (textContent: string): string[] | null => {
         });
     }
 
-    return null;
+    return [];
+};
+
+const getPackageNamesFromPackageJSON = (jsonTextContent: string): string[] => {
+    let packageJSON: Record<string, any> | undefined;
+    try {
+        packageJSON = JSON.parse(jsonTextContent);
+    } catch (error) {
+        vscode.window.showErrorMessage('Parse package.json error');
+        console.error(error);
+    }
+
+    const packageNames: string[] = [];
+    if (!packageJSON) return [];
+
+    if (packageJSON.dependencies) {
+        packageNames.push(...Object.keys(packageJSON.dependencies));
+    }
+
+    if (packageJSON.devDependencies) {
+        packageNames.push(...Object.keys(packageJSON.devDependencies));
+    }
+
+    return packageNames;
 };
 
 export default async function handleViewActiveEditorRepository() {
     const supportedLanguageIds = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue'];
     const activeEditor = vscode.window.activeTextEditor;
 
-    if (activeEditor && supportedLanguageIds.includes(activeEditor.document.languageId)) {
+    if (activeEditor) {
         const editorContent = activeEditor.document.getText();
-        const moduleNames = extractModuleNames(editorContent);
+        let moduleNames: string[] | undefined;
+
+        if (activeEditor.document.fileName.endsWith('package.json')) {
+            moduleNames = getPackageNamesFromPackageJSON(editorContent);
+        } else if (supportedLanguageIds.includes(activeEditor.document.languageId)) {
+            moduleNames = extractModuleNames(editorContent);
+        }
 
         if (moduleNames) {
             if (moduleNames.length === 1) {
