@@ -1,65 +1,37 @@
-# view-github-repository README
+# View GitHub Repository
 
-This is the README for your extension "view-github-repository". After writing up a brief description, we recommend including the following sections.
+Open npm package GitHub repository straight from VSCode.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+This extension provides two command:
 
-For example if there is an image subfolder under your extension project workspace:
+1. `view github repository (active editor)`
+2. `view github repository (package.json)`
 
-\!\[feature X\]\(images/feature-x.png\)
+## Usage
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. navigate to the file where you import/require the package.
+2. Use shortcut `ctrl + shift + p` or `cmd + shift + p` on macos to show command panel, input one of command above.
 
-## Requirements
+![view github repository of active editor](https://github.com/tjx666/view-github-repository/tree/master/screenshots/activeEditor.gif)
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## view github repository (active editor)
 
-## Extension Settings
+With this command, you can open the github repository of npm packages which imported/required in current active editor.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Support languages:
 
-For example:
+- javascript
+- javascriptreact
+- vue
+- typescript
+- typescriptreact
 
-This extension contributes the following settings:
+If you select a node builtIn module, the extension will open the nodejs official document of selected module.
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+If current active editor file is package.json, the extension will list all the dependencies and devDependencies modules.
 
-## Known Issues
+## view github repository (package.json)
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+This command will load all the module names from package.json exists in workspace root path.
