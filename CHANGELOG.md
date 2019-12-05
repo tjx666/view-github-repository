@@ -1,9 +1,6 @@
-# Change Log
+## [1.0.0] - 2019-12-05
 
-All notable changes to the "view-github-repository" extension will be documented in this file.
+### Added
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+- Support open the github repository of npm packages which imported/required in current active editor
+- Support open github repository of npm package listed in dependencies and devDependencies parts of package.json
