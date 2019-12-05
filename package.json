@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "description": "Open package GitHub repository straight from VScode",
+    "description": "Open npm package GitHub repository straight from VScode",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.40.0"
@@ -18,11 +18,11 @@
         "commands": [
             {
                 "command": "viewGithubRepository.viewActiveEditorRepository",
-                "title": "view github repository(active editor)"
+                "title": "view github repository (active editor)"
             },
             {
                 "command": "viewGithubRepository.viewPackageJSONRepository",
-                "title": "view github repository(package.json)"
+                "title": "view github repository (package.json)"
             }
         ]
     },
