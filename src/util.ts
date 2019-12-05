@@ -13,7 +13,7 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
 
     let resp: any;
     try {
-        resp = await axios.get(packageInfoURL.replace(':name', moduleName));
+        resp = await axios.get(packageInfoURL.replace(':name', encodeURIComponent(moduleName)));
     } catch (error) {
         vscode.window.showErrorMessage(`Get module ${moduleName} info occur error, check your network!`);
         console.error(error);
@@ -27,16 +27,25 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
     return null;
 }
 
-export async function viewGithubRepository(moduleName: string) {
-    if (builtInModules.includes(moduleName)) {
-        const nodeBuiltInModuleDocumentURL = `https://nodejs.org/api/${moduleName}.html`;
-        await open(nodeBuiltInModuleDocumentURL);
+export async function viewGithubRepository(moduleNames: string[]) {
+    let moduleName: string | undefined;
+    if (moduleNames.length === 1) {
+        [moduleName] = moduleNames;
     } else {
-        const repositoryURL = await fetchNpmPackageRepository(moduleName);
-        if (repositoryURL) {
-            open(repositoryURL);
+        moduleName = await vscode.window.showQuickPick(moduleNames);
+    }
+
+    if (moduleName) {
+        if (builtInModules.includes(moduleName)) {
+            const nodeBuiltInModuleDocumentURL = `https://nodejs.org/api/${moduleName}.html`;
+            await open(nodeBuiltInModuleDocumentURL);
         } else {
-            vscode.window.showErrorMessage(`The module ${moduleName} doesn't seem to exist!`);
+            const repositoryURL = await fetchNpmPackageRepository(moduleName);
+            if (repositoryURL) {
+                open(repositoryURL);
+            } else {
+                vscode.window.showErrorMessage(`The module ${moduleName} doesn't seem to exist!`);
+            }
         }
     }
 }
@@ -70,5 +79,5 @@ export function getPackageNamesFromPackageJSON(jsonTextContent: string): string[
         packageNames.push(...Object.keys(packageJSON.devDependencies));
     }
 
-    return packageNames;
+    return packageNames.filter(packageName => !packageName.startsWith('@types/'));
 }

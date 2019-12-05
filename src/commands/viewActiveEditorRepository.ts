@@ -45,14 +45,7 @@ const handleViewActiveEditorRepository = async () => {
         }
 
         if (moduleNames) {
-            if (moduleNames.length === 1) {
-                viewGithubRepository(moduleNames[0]);
-            } else {
-                const moduleName = await vscode.window.showQuickPick(moduleNames);
-                if (moduleName) {
-                    viewGithubRepository(moduleName);
-                }
-            }
+            viewGithubRepository(moduleNames);
         }
     }
 };
