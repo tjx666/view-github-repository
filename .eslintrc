@@ -42,6 +42,12 @@
                 "import/prefer-default-export": "off",
                 "consistent-return": "off"
             }
+        },
+        {
+            "files": ["scripts/**/*.ts", "configs/**/*.ts"],
+            "rules": {
+                "import/no-extraneous-dependencies": "off"
+            }
         }
     ]
 }
