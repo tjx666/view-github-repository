@@ -55,11 +55,12 @@
     "scripts": {
         "vscode:prepublish": "yarn run build",
         "compile": "cross-env NODE_ENV=development ts-node --files ./scripts/pack.ts ",
+        "watch": "npm run compile -- --watch",
+        "test-compile": "rimraf -rf ./out && tsc -p ./tsconfig.test.json",
         "build": "cross-env NODE_ENV=production ts-node --files ./scripts/pack.ts",
-        "watch": "cross-env NODE_ENV=development ts-node --files ./scripts/pack.ts --watch",
-        "pretest": "yarn run compile",
-        "test": "node ./out/test/runTest.js",
-        "lint": "lint-staged"
+        "lint": "eslint -c .eslintrc --ext .ts ./{src,test}/**/*.ts",
+        "test": "node ./out/test/runTests.js",
+        "test-all": "npm run lint && npm run est-compile && npm run test"
     },
     "husky": {
         "hooks": {
@@ -106,8 +107,10 @@
         "husky": "^3.1.0",
         "lint-staged": "^9.5.0",
         "mocha": "^6.2.2",
+        "nyc": "^14.1.1",
         "prettier": "^1.19.1",
         "progress-bar-webpack-plugin": "^1.12.1",
+        "rimraf": "^3.0.0",
         "terser-webpack-plugin": "^2.2.1",
         "ts-loader": "^6.2.1",
         "ts-node": "^8.5.4",
