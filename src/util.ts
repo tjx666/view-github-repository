@@ -17,6 +17,7 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
     } catch (error) {
         vscode.window.showErrorMessage(`Get module ${moduleName} info occur error, check your network!`);
         console.error(error);
+        return null;
     }
 
     const repositoryURL: string | undefined = _.get(resp, 'data.collected.metadata.links.repository');
