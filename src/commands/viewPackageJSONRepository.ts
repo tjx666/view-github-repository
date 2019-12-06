@@ -1,4 +1,3 @@
-import * as vscode from 'vscode';
 import { resolve } from 'path';
 import fs from 'fs-extra';
 import { getPackageNamesFromPackageJSON, getRootPath, viewGithubRepository } from '../util';

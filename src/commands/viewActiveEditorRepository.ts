@@ -13,16 +13,9 @@ const extractModuleNames = (textContent: string): string[] => {
 
     if (importStatements) {
         return importStatements.map(importStatement => {
-            let matchedRegexp: RegExp | undefined;
-
-            if (importStatement.includes('require')) {
-                matchedRegexp = requireRegexp;
-            } else if (importStatement.includes('import')) {
-                matchedRegexp = importRegexp;
-            } else {
-                matchedRegexp = exportRegexp;
-            }
-
+            const matchedRegexp = [requireRegexp, importRegexp, exportRegexp].find(regexp =>
+                regexp.test(importStatement)
+            )!;
             return importStatement.match(matchedRegexp)![2];
         });
     }
@@ -44,7 +37,7 @@ const handleViewActiveEditorRepository = async () => {
             moduleNames = extractModuleNames(editorContent);
         }
 
-        if (moduleNames) {
+        if (moduleNames && moduleNames.length > 0) {
             viewGithubRepository(moduleNames);
         }
     }

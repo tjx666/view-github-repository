@@ -28,23 +28,36 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
 }
 
 export async function viewGithubRepository(moduleNames: string[]) {
-    let moduleName: string | undefined;
+    let selectedModuleName: string | undefined;
     if (moduleNames.length === 1) {
-        [moduleName] = moduleNames;
+        [selectedModuleName] = moduleNames;
     } else {
-        moduleName = await vscode.window.showQuickPick(moduleNames);
+        const items = moduleNames.map(moduleName => {
+            const item: vscode.QuickPickItem = { label: moduleName };
+            if (builtInModules.includes(moduleName)) {
+                item.description = 'builtIn';
+            }
+
+            return item;
+        });
+        const selectedItem = await vscode.window.showQuickPick(items, {
+            placeHolder: 'select the module you want to browse and press Enter',
+        });
+        if (selectedItem) {
+            selectedModuleName = selectedItem.label;
+        }
     }
 
-    if (moduleName) {
-        if (builtInModules.includes(moduleName)) {
-            const nodeBuiltInModuleDocumentURL = `https://nodejs.org/api/${moduleName}.html`;
+    if (selectedModuleName) {
+        if (builtInModules.includes(selectedModuleName)) {
+            const nodeBuiltInModuleDocumentURL = `https://nodejs.org/api/${selectedModuleName}.html`;
             await open(nodeBuiltInModuleDocumentURL);
         } else {
-            const repositoryURL = await fetchNpmPackageRepository(moduleName);
+            const repositoryURL = await fetchNpmPackageRepository(selectedModuleName);
             if (repositoryURL) {
                 open(repositoryURL);
             } else {
-                vscode.window.showErrorMessage(`The module ${moduleName} doesn't seem to exist!`);
+                vscode.window.showErrorMessage(`The module ${selectedModuleName} doesn't seem to exist!`);
             }
         }
     }
