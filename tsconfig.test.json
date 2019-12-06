@@ -26,5 +26,5 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
-    "exclude": ["node_modules", ".vscode-test", "out", "test-fixture"]
+    "exclude": ["node_modules", ".vscode-test", "out", "configs", "scripts", "test-fixture"]
 }
