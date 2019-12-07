@@ -2,10 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "ES2018",
-        "outDir": "out",
         "removeComments": true,
-        "lib": ["ES2018"],
-        "sourceMap": true,
         "rootDir": ".",
         "isolatedModules": true,
 
@@ -26,5 +23,5 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
-    "include": ["src", "typings"]
+    "include": ["configs", "scripts", "typings"]
 }

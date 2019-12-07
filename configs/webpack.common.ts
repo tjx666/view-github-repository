@@ -12,7 +12,7 @@ const commonWebpackConfig: Configuration = {
         filename: 'extension.js',
         devtoolModuleFilenameTemplate: '../[resource-path]',
     },
-    resolve: { extensions: ['.ts', '.js', '.json'] },
+    resolve: { extensions: ['.ts', '.js'] },
     externals: {
         vscode: 'commonjs vscode',
     },
@@ -25,7 +25,7 @@ const commonWebpackConfig: Configuration = {
             },
         ],
     },
-    plugins: [new CleanWebpackPlugin(), new ProgressBarPlugin({ clear: false })],
+    plugins: [new ProgressBarPlugin(), new CleanWebpackPlugin()],
 };
 
 export default commonWebpackConfig;

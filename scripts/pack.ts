@@ -3,7 +3,8 @@ import { argv } from 'yargs';
 import devWebpackConfig from '../configs/webpack.dev';
 import prodWebpackConfig from '../configs/webpack.prod';
 
-const compiler = webpack(process.env.NODE_ENV === 'development' ? devWebpackConfig : prodWebpackConfig);
+const isProd = process.env.NODE_ENV !== 'development';
+const compiler = webpack(isProd ? prodWebpackConfig : devWebpackConfig);
 const compileHandler: Compiler.Handler = (error, stats) => {
     const compileError: Error & { details?: string } = error;
     if (error) {
@@ -16,7 +17,7 @@ const compileHandler: Compiler.Handler = (error, stats) => {
         return;
     }
 
-    console.log(stats.toString({ colors: true, modules: false }));
+    console.log(stats.toString(isProd ? 'normal' : 'errors-only'));
 };
 
 if (argv.watch) {

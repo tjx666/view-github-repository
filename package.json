@@ -66,13 +66,13 @@
     },
     "scripts": {
         "vscode:prepublish": "yarn run build",
-        "compile": "cross-env NODE_ENV=development ts-node --files ./scripts/pack.ts ",
-        "watch": "npm run compile -- --watch",
+        "compile": "cross-env NODE_ENV=development ts-node --files -P ./tsconfig.webpack.json ./scripts/pack.ts",
+        "watch": "yarn run compile -- --watch",
         "test-compile": "rimraf -rf ./out && tsc -p ./tsconfig.test.json",
-        "build": "cross-env NODE_ENV=production ts-node --files ./scripts/pack.ts",
+        "build": "cross-env NODE_ENV=production ts-node --files -P ./tsconfig.webpack.json ./scripts/pack.ts",
         "lint": "eslint -c .eslintrc --ext .ts ./{src,test}/**/*.ts",
         "test": "node ./out/test/runTests.js",
-        "test-all": "npm run lint && npm run test-compile && npm run test -- --production"
+        "test-all": "yarn run lint && yarn run test-compile && yarn run test"
     },
     "husky": {
         "hooks": {
