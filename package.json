@@ -60,7 +60,7 @@
         "build": "cross-env NODE_ENV=production ts-node --files ./scripts/pack.ts",
         "lint": "eslint -c .eslintrc --ext .ts ./{src,test}/**/*.ts",
         "test": "node ./out/test/runTests.js",
-        "test-all": "npm run lint && npm run est-compile && npm run test"
+        "test-all": "npm run lint && npm run test-compile && npm run test -- --production"
     },
     "husky": {
         "hooks": {

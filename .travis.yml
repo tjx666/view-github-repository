@@ -13,6 +13,6 @@ install:
   - yarn
 
 script:
-  - yarn test
+  - yarn run test-all
 
 cache: yarn
