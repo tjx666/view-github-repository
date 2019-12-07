@@ -1,8 +1,19 @@
+## [0.0.3] - 2019-12-07
+
+### Added
+
+- add placeholder to picker
+- add builtIn description in picker list
+
+### Changed
+
+- optimize the regexps to extract module names
+
 ## [0.0.2] - 2019-12-05
 
 ### Added
 
-- add some badges to READNE
+- add some badges to README
 
 ### Fixed
 
