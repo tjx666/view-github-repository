@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
@@ -12,6 +12,18 @@
     },
     "icon": "images/logo.png",
     "license": "SEE LICENSE IN LICENSE",
+    "badges": [
+        {
+            "url": "https://img.shields.io/badge/License-MIT-brightgreen.svg",
+            "description": "License: MIT",
+            "href": "https://github.com/tjx666/view-github-repository/blob/master/LICENSE"
+        },
+        {
+            "url": "https://img.shields.io/badge/PRs-welcome-brightgreen.svg",
+            "description": "PRs Welcome",
+            "href": "https://github.com/tjx666/view-github-repository"
+        }
+    ],
     "homepage": "https://github.com/tjx666/view-github-repository/blob/master/README.md",
     "bugs": {
         "url": "https://github.com/tjx666/view-github-repository/issues",

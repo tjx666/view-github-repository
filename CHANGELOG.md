@@ -1,3 +1,11 @@
+## [0.0.5] - 2019-12-07
+
+### Changed
+
+- add some badges and adjust the README layout
+
+- integrate travis ci
+
 ## [0.0.4] - 2019-12-07
 
 ### Added
