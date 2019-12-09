@@ -22,6 +22,9 @@ const commonWebpackConfig: Configuration = {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 loader: 'ts-loader',
+                options: {
+                    configFile: resolve(__dirname, '../tsconfig.dev.json'),
+                },
             },
         ],
     },

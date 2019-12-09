@@ -3,19 +3,45 @@ import axios from 'axios';
 import builtInModules from 'builtin-modules';
 import _ from 'lodash';
 import open from 'open';
+import packageJson, { FullMetadata } from 'package-json';
 
 /**
- * get npm package infos provided by https://api-docs.npms.io/
+ * get npm package infos provided by https://api-docs.npms.io/ or https://registry.npmjs.com
+ * the former's delay is lower than later
+ * but the former's scoop package repository URL isn't right
  * @param moduleName
  */
 export async function fetchNpmPackageRepository(moduleName: string): Promise<string | null> {
-    const packageInfoURL = 'https://api.npms.io/v2/package/:name';
+    // if package is a scoop package
+    if (moduleName.startsWith('@')) {
+        let metadata: FullMetadata | undefined;
+        try {
+            metadata = await packageJson(moduleName, { fullMetadata: true });
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
 
+        const homepage = _.get(metadata, 'homepage');
+        if (homepage && homepage.startsWith('https://github.com/')) return homepage;
+
+        const repositoryURL: string | undefined = _.get(metadata, ['repository', 'url']);
+        if (repositoryURL) {
+            if (repositoryURL.startsWith('https://github.com/')) {
+                return repositoryURL;
+            }
+
+            if (repositoryURL.startsWith('git+https://github.com/')) {
+                return repositoryURL.slice(4, -4);
+            }
+        }
+    }
+
+    const packageInfoURL = 'https://api.npms.io/v2/package/:name';
     let resp: any;
     try {
         resp = await axios.get(packageInfoURL.replace(':name', encodeURIComponent(moduleName)));
     } catch (error) {
-        vscode.window.showErrorMessage(`Get module ${moduleName} info occur error, check your network!`);
         console.error(error);
         return null;
     }
@@ -58,7 +84,7 @@ export async function viewGithubRepository(moduleNames: string[]) {
             if (repositoryURL) {
                 open(repositoryURL);
             } else {
-                vscode.window.showErrorMessage(`The module ${selectedModuleName} doesn't seem to exist!`);
+                vscode.window.showErrorMessage(`can't resolve the github repository of module ${selectedModuleName}!`);
             }
         }
     }

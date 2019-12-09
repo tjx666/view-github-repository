@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "0.0.5",
+    "version": "1.0.0",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
@@ -56,7 +56,7 @@
         "commands": [
             {
                 "command": "viewGithubRepository.viewActiveEditorRepository",
-                "title": "view github repository (active editor)"
+                "title": "view github repository"
             },
             {
                 "command": "viewGithubRepository.viewPackageJSONRepository",
@@ -92,8 +92,10 @@
         "axios": "^0.19.0",
         "builtin-modules": "^3.1.0",
         "fs-extra": "^8.1.0",
+        "is-online": "^8.2.1",
         "lodash": "^4.17.15",
-        "open": "^7.0.0"
+        "open": "^7.0.0",
+        "package-json": "^6.5.0"
     },
     "devDependencies": {
         "@types/fs-extra": "^8.0.1",
@@ -113,7 +115,7 @@
         "eslint": "^6.7.2",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-config-prettier": "^6.7.0",
-        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-import": "2.18.2",
         "eslint-plugin-prettier": "^3.1.1",
         "glob": "^7.1.5",
         "husky": "^3.1.0",
@@ -123,10 +125,10 @@
         "prettier": "^1.19.1",
         "progress-bar-webpack-plugin": "^1.12.1",
         "rimraf": "^3.0.0",
-        "terser-webpack-plugin": "^2.2.1",
+        "terser-webpack-plugin": "^2.2.2",
         "ts-loader": "^6.2.1",
         "ts-node": "^8.5.4",
-        "typescript": "^3.6.4",
+        "typescript": "^3.7.3",
         "vscode-test": "^1.2.2",
         "webpack": "^4.41.2",
         "webpack-merge": "^4.2.2",

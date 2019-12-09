@@ -26,5 +26,5 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },
-    "exclude": ["node_modules", "node_modules", "test-fixture"]
+    "include": ["src", "typings"]
 }
