@@ -14,33 +14,33 @@ Open npm package GitHub repository straight from VSCode.
 
 This extension provides two commands:
 
-1. `view github repository (active editor)`
+1. `view github repository`
 2. `view github repository (package.json)`
 
 ## Usage
 
 1. navigate to the file where you import/require the npm packages.
-2. use the shortcut `ctrl + shift + p` or `cmd + shift + p` on macOS to expand command panel, input one of commands you need listed above.
+2. use the shortcut `ctrl + shift + p` or `cmd + shift + p` on macOS to expand command panel, select one of commands you need listed above.
 
 ![view github repository of active editor](https://github.com/tjx666/view-github-repository/blob/master/images/usage.gif?raw=true)
 
 ## Details
 
-### view github repository (active editor)
+### view github repository
 
 With this command, you can open the github repository of npm packages which imported/required in current active editor.
 
 Support languages:
 
-- javascript
-- javascriptreact
-- vue
-- typescript
-- typescriptreact
+- javascript(.js)
+- javascriptreact(.jsx)
+- vue(.vue)
+- typescript(.ts)
+- typescriptreact(.tsx)
 
 If you select a node builtIn module, the extension will open the nodejs official document of selected module.
 
-If current active editor fileName is `package.json`, the extension will list all the dependencies and devDependencies modules.
+If current active editor's fileName is just `package.json`, this extension will list all the dependencies and devDependencies modules.
 
 ### view github repository (package.json)
 

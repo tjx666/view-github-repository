@@ -1,3 +1,10 @@
+## [1.0.1] - 2019-12-09
+
+### Added
+
+- support scoop package
+- new logo and usage GIF
+
 ## [0.0.5] - 2019-12-07
 
 ### Changed
