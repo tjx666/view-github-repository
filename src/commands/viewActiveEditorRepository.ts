@@ -2,9 +2,9 @@ import * as vscode from 'vscode';
 import { getPackageNamesFromPackageJSON, viewGithubRepository } from '../util';
 
 const extractModuleNames = (textContent: string): string[] => {
-    const requireRegexp = /require\(("|')([^.][a-zA-Z0-9-._]*?)("|')\)/;
-    const importRegexp = /import\s+.*?('|")([^.][a-zA-Z0-9-._]*?)('|")/;
-    const exportRegexp = /export\s+.*?from\s+('|")([^.][a-zA-Z0-9-._]*?)('|")/;
+    const requireRegexp = /require\(("|')([^.][a-zA-Z0-9-._@/]*?)("|')\)/;
+    const importRegexp = /import\s+.*?('|")([^.][a-zA-Z0-9-._@/]*?)('|")/;
+    const exportRegexp = /export\s+.*?from\s+('|")([^.][a-zA-Z0-9-._@/]*?)('|")/;
     const importStatementRegexp = new RegExp(
         `${requireRegexp.source}|${importRegexp.source}|${exportRegexp.source}`,
         'g'
