@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
@@ -121,7 +121,6 @@
         "husky": "^3.1.0",
         "lint-staged": "^9.5.0",
         "mocha": "^6.2.2",
-        "nyc": "^14.1.1",
         "prettier": "^1.19.1",
         "progress-bar-webpack-plugin": "^1.12.1",
         "rimraf": "^3.0.0",
