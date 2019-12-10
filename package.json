@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
@@ -40,12 +40,19 @@
         "Other"
     ],
     "keywords": [
-        "vscode",
-        "vscode-extension",
         "view-gitHub-repository",
         "view-github",
         "view-repository",
-        "github-repository"
+        "github",
+        "repository",
+        "github-repository",
+        "npm",
+        "package",
+        "npm-package",
+        "node-package",
+        "view-package",
+        "view-npm-package",
+        "view-node-package"
     ],
     "activationEvents": [
         "onCommand:viewGithubRepository.viewActiveEditorRepository",
