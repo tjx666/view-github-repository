@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
