@@ -45,3 +45,7 @@ If current active editor's fileName is just `package.json`, this extension will 
 ### view github repository (package.json)
 
 This command will load all the module names from package.json exists in workspace root path.
+
+## 🧡 Backers
+
+Thanks to `JiangShiqi` for designing the extension's logo.
