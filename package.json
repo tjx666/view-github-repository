@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
@@ -34,7 +34,7 @@
         "url": "https://github.com/tjx666/view-github-repository"
     },
     "engines": {
-        "vscode": "^1.40.0"
+        "vscode": "^1.37.0"
     },
     "categories": [
         "Other"
@@ -81,10 +81,10 @@
     },
     "scripts": {
         "vscode:prepublish": "yarn run build",
-        "compile": "cross-env NODE_ENV=development ts-node --files -P ./tsconfig.webpack.json ./scripts/pack.ts",
+        "compile": "cross-env NODE_ENV=development ts-node --files -P ./build/tsconfig.json ./build",
         "watch": "yarn run compile -- --watch",
-        "test-compile": "rimraf -rf ./out && tsc -p ./tsconfig.test.json",
-        "build": "cross-env NODE_ENV=production ts-node --files -P ./tsconfig.webpack.json ./scripts/pack.ts",
+        "test-compile": "tsc -p ./tsconfig.test.json",
+        "build": "cross-env NODE_ENV=production ts-node --files -P ./build/tsconfig.json ./build",
         "lint": "eslint -c .eslintrc --ext .ts ./{src,test}/**/*.ts",
         "test": "node ./out/test/runTests.js",
         "test-all": "yarn run lint && yarn run test-compile && yarn run test"
@@ -104,7 +104,7 @@
         ]
     },
     "dependencies": {
-        "axios": "^0.19.0",
+        "axios": "^0.19.1",
         "builtin-modules": "^3.1.0",
         "fs-extra": "^8.1.0",
         "is-online": "^8.2.1",
@@ -118,37 +118,37 @@
         "@types/hard-source-webpack-plugin": "^1.0.1",
         "@types/lodash": "^4.14.149",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^12.11.7",
+        "@types/node": "^13.1.5",
         "@types/terser-webpack-plugin": "^2.2.0",
-        "@types/vscode": "^1.40.0",
-        "@types/webpack": "^4.41.0",
+        "@types/vscode": "1.37.0",
+        "@types/webpack": "^4.41.2",
         "@types/webpack-merge": "^4.1.5",
-        "@types/yargs": "^13.0.3",
-        "@typescript-eslint/eslint-plugin": "^2.10.0",
-        "@typescript-eslint/parser": "^2.10.0",
+        "@types/yargs": "^15.0.0",
+        "@typescript-eslint/eslint-plugin": "^2.15.0",
+        "@typescript-eslint/parser": "^2.15.0",
         "clean-webpack-plugin": "^3.0.0",
         "cross-env": "^6.0.3",
-        "eslint": "^6.7.2",
+        "eslint": "^6.8.0",
         "eslint-config-airbnb-base": "^14.0.0",
-        "eslint-config-prettier": "^6.7.0",
-        "eslint-plugin-import": "2.18.2",
-        "eslint-plugin-prettier": "^3.1.1",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-plugin-import": "2.19.1",
+        "eslint-plugin-prettier": "^3.1.2",
         "glob": "^7.1.5",
         "hard-source-webpack-plugin": "^0.13.1",
-        "husky": "^3.1.0",
+        "husky": "^4.0.3",
         "lint-staged": "^9.5.0",
-        "mocha": "^6.2.2",
+        "mocha": "^7.0.0",
         "prettier": "^1.19.1",
         "progress-bar-webpack-plugin": "^1.12.1",
         "rimraf": "^3.0.0",
         "speed-measure-webpack-plugin": "^1.3.1",
-        "terser-webpack-plugin": "^2.2.2",
+        "terser-webpack-plugin": "^2.3.2",
         "ts-loader": "^6.2.1",
         "ts-node": "^8.5.4",
-        "typescript": "^3.7.3",
-        "vscode-test": "^1.2.2",
-        "webpack": "^4.41.2",
+        "typescript": "^3.7.4",
+        "vscode-test": "^1.3.0",
+        "webpack": "^4.41.5",
         "webpack-merge": "^4.2.2",
-        "yargs": "^15.0.2"
+        "yargs": "^15.1.0"
     }
 }

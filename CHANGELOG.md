@@ -1,4 +1,17 @@
+## [1.0.4] - 2020-01-09
+
+### Changed
+
+- simplify tsconfigs
+- upgrade dependencies
+
+### Added
+
+- support child module
+
 ## [1.0.3] - 2019-12-12
+
+### Changed
 
 - add backers
 
