@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { getPackageNamesFromPackageJSON, viewGithubRepository } from '../util';
 
-const extractModuleNames = (textContent: string): string[] => {
+function extractModuleNames(textContent: string): string[] {
     const requireRegexp = /require\(("|')([^.][a-zA-Z0-9-._@/]*?)("|')\)/;
     const importRegexp = /import\s+.*?('|")([^.][a-zA-Z0-9-._@/]*?)('|")/;
     const exportRegexp = /export\s+.*?from\s+('|")([^.][a-zA-Z0-9-._@/]*?)('|")/;
@@ -16,14 +16,17 @@ const extractModuleNames = (textContent: string): string[] => {
             const matchedRegexp = [requireRegexp, importRegexp, exportRegexp].find(regexp =>
                 regexp.test(importStatement)
             )!;
-            return importStatement.match(matchedRegexp)![2];
+            const moduleName = importStatement.match(matchedRegexp)![2];
+            const slashIndex = moduleName.indexOf('/');
+
+            return slashIndex === -1 ? moduleName : moduleName.slice(0, slashIndex);
         });
     }
 
     return [];
-};
+}
 
-const handleViewActiveEditorRepository = async () => {
+async function handler() {
     const supportedLanguageIds = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue'];
     const activeEditor = vscode.window.activeTextEditor;
 
@@ -41,11 +44,11 @@ const handleViewActiveEditorRepository = async () => {
             viewGithubRepository(moduleNames);
         }
     }
-};
+}
 
 const viewActiveEditorRepository: CommandModule = {
     identifier: 'viewActiveEditorRepository',
-    handler: handleViewActiveEditorRepository,
+    handler,
 };
 
 export default viewActiveEditorRepository;

@@ -1,8 +1,9 @@
 import { resolve } from 'path';
 import fs from 'fs-extra';
+
 import { getPackageNamesFromPackageJSON, getRootPath, viewGithubRepository } from '../util';
 
-const handleViewPackageJSONRepository = async () => {
+async function handler() {
     const rootPath = getRootPath();
     if (rootPath) {
         const packageJSONPath = resolve(rootPath, './package.json');
@@ -14,11 +15,11 @@ const handleViewPackageJSONRepository = async () => {
             viewGithubRepository(packageNames);
         }
     }
-};
+}
 
 const viewPackageJSONRepository: CommandModule = {
     identifier: 'viewPackageJSONRepository',
-    handler: handleViewPackageJSONRepository,
+    handler,
 };
 
 export default viewPackageJSONRepository;

@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import assert, { equal } from 'assert';
 import fs from 'fs-extra';
+
 import { fetchNpmPackageRepository, getRootPath, getPackageNamesFromPackageJSON } from '../src/util';
 
 describe('#utils', () => {

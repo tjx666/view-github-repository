@@ -26,4 +26,3 @@ tsconfig.test.json
 .editorconfig
 yarn.lock
 *.log
-

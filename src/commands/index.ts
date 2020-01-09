@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import isOnline from 'is-online';
+
 import viewActiveEditorRepository from './viewActiveEditorRepository';
 import viewPackageJSONRepository from './viewPackageJSONRepository';
 
