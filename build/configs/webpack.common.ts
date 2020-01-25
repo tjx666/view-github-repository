@@ -1,7 +1,9 @@
 import { resolve } from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, BannerPlugin } from 'webpack';
+import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
 const projectRoot = resolve(__dirname, '../../');
@@ -31,8 +33,19 @@ const commonWebpackConfig: Configuration = {
         ],
     },
     plugins: [
-        new ProgressBarPlugin(),
+        new BannerPlugin('VSCode extension view-github-repository is develop by YuTengjing under MIT license'),
+        new WebpackBar({
+            name: 'VSCode extension',
+            color: '#0066B8',
+        }),
         new CleanWebpackPlugin(),
+        new CaseSensitivePathsPlugin(),
+        new CircularDependencyPlugin({
+            exclude: /node_modules/,
+            failOnError: true,
+            allowAsyncCycles: false,
+            cwd: process.cwd(),
+        }),
         new HardSourceWebpackPlugin({
             info: { mode: 'none', level: 'warn' },
         }),

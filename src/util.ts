@@ -1,8 +1,6 @@
 import * as vscode from 'vscode';
 import axios from 'axios';
-import builtInModules from 'builtin-modules';
-import _ from 'lodash';
-import open from 'open';
+import { get } from 'dot-prop';
 import packageJson, { FullMetadata } from 'package-json';
 
 /**
@@ -22,10 +20,10 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
             return null;
         }
 
-        const homepage = _.get(metadata, 'homepage');
+        const homepage = get<string>(metadata, 'homepage');
         if (homepage && homepage.startsWith('https://github.com/')) return homepage;
 
-        const repositoryURL: string | undefined = _.get(metadata, ['repository', 'url']);
+        const repositoryURL: string | undefined = get<string>(metadata, 'repository.url');
         if (repositoryURL) {
             if (repositoryURL.startsWith('https://github.com/')) {
                 return repositoryURL;
@@ -46,7 +44,7 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
         return null;
     }
 
-    const repositoryURL: string | undefined = _.get(resp, 'data.collected.metadata.links.repository');
+    const repositoryURL: string | undefined = get(resp, 'data.collected.metadata.links.repository');
     if (repositoryURL) {
         return repositoryURL;
     }
@@ -54,44 +52,41 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
     return null;
 }
 
-export async function viewGithubRepository(moduleNames: string[]) {
-    let selectedModuleName: string | undefined;
-    if (moduleNames.length === 1) {
-        [selectedModuleName] = moduleNames;
-    } else {
-        const items = moduleNames.map(moduleName => {
-            const item: vscode.QuickPickItem = { label: moduleName };
-            if (builtInModules.includes(moduleName)) {
-                item.description = 'builtIn';
-            }
+export function extractModuleNames(textContent: string): string[] {
+    const moduleNameRegexpSource = /("|')([^./][a-zA-Z0-9-._@/]*?)("|')/.source;
+    const requireRegexp = new RegExp(`require\\(${moduleNameRegexpSource}\\)`);
+    const importRegexp = new RegExp(`import\\s+.*?${moduleNameRegexpSource}`);
+    const exportRegexp = new RegExp(`export\\s+.*?from\\s+${moduleNameRegexpSource}`);
+    const importStatementRegexp = new RegExp(
+        `${requireRegexp.source}|${importRegexp.source}|${exportRegexp.source}`,
+        'g'
+    );
+    const importStatements = textContent.match(importStatementRegexp);
 
-            return item;
-        });
-        const selectedItem = await vscode.window.showQuickPick(items, {
-            placeHolder: 'select the module you want to browse and press Enter',
-        });
-        if (selectedItem) {
-            selectedModuleName = selectedItem.label;
-        }
+    if (importStatements) {
+        return importStatements
+            .map(importStatement => {
+                const matchedRegexp = [requireRegexp, importRegexp, exportRegexp].find(regexp =>
+                    regexp.test(importStatement)
+                )!;
+                const moduleName = importStatement.match(matchedRegexp)![2];
+
+                if (!moduleName.startsWith('@')) {
+                    const slashIndex = moduleName.indexOf('/');
+                    if (~slashIndex) return moduleName.slice(0, slashIndex);
+                }
+
+                return moduleName;
+            })
+            .filter(moduleName => !moduleName.startsWith('@types/'));
     }
 
-    if (selectedModuleName) {
-        if (builtInModules.includes(selectedModuleName)) {
-            const nodeBuiltInModuleDocumentURL = `https://nodejs.org/api/${selectedModuleName}.html`;
-            await open(nodeBuiltInModuleDocumentURL);
-        } else {
-            const repositoryURL = await fetchNpmPackageRepository(selectedModuleName);
-            if (repositoryURL) {
-                open(repositoryURL);
-            } else {
-                vscode.window.showErrorMessage(`can't resolve the github repository of module ${selectedModuleName}!`);
-            }
-        }
-    }
+    return [];
 }
 
 export function getRootPath(): string | null {
     const { workspaceFolders } = vscode.workspace;
+
     if (workspaceFolders && workspaceFolders.length > 0) {
         return workspaceFolders[0].uri.fsPath;
     }
@@ -100,24 +95,23 @@ export function getRootPath(): string | null {
 }
 
 export function getPackageNamesFromPackageJSON(jsonTextContent: string): string[] {
-    let packageJSON: Record<string, any> | undefined;
+    let packageJSON: any;
+
     try {
         packageJSON = JSON.parse(jsonTextContent);
     } catch (error) {
-        vscode.window.showErrorMessage('Parse package.json error');
         console.error(error);
+        vscode.window.showErrorMessage('Parse package.json error!');
+        return [];
     }
 
     const packageNames: string[] = [];
+
     if (!packageJSON) return [];
 
-    if (packageJSON.dependencies) {
-        packageNames.push(...Object.keys(packageJSON.dependencies));
-    }
+    if (packageJSON.dependencies) packageNames.push(...Object.keys(packageJSON.dependencies));
 
-    if (packageJSON.devDependencies) {
-        packageNames.push(...Object.keys(packageJSON.devDependencies));
-    }
+    if (packageJSON.devDependencies) packageNames.push(...Object.keys(packageJSON.devDependencies));
 
     return packageNames.filter(packageName => !packageName.startsWith('@types/'));
 }
