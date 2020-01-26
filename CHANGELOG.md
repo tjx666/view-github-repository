@@ -1,4 +1,10 @@
-## [1.0.5] - 2020-01-09
+## [1.0.6] - 2020-01-26
+
+### Changed
+
+- optimize webpack config
+
+## [1.0.5] - 2020-01-25
 
 ### Changed
 
@@ -6,6 +12,8 @@
 - reduce dependencies
 - add more tests
 - refactor bad code
+
+## [1.0.4] - 2020-01-09
 
 ### Changed
 
