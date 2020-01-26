@@ -5,6 +5,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 
 const projectRoot = resolve(__dirname, '../../');
 const commonWebpackConfig: Configuration = {
@@ -33,18 +34,19 @@ const commonWebpackConfig: Configuration = {
         ],
     },
     plugins: [
-        new BannerPlugin('VSCode extension view-github-repository is develop by YuTengjing under MIT license'),
+        new BannerPlugin('VSCode extension view-github-repository is developed by YuTengjing under MIT license'),
         new WebpackBar({
             name: 'VSCode extension',
             color: '#0066B8',
         }),
+        new FriendlyErrorsPlugin(),
         new CleanWebpackPlugin(),
         new CaseSensitivePathsPlugin(),
         new CircularDependencyPlugin({
             exclude: /node_modules/,
             failOnError: true,
             allowAsyncCycles: false,
-            cwd: process.cwd(),
+            cwd: projectRoot,
         }),
         new HardSourceWebpackPlugin({
             info: { mode: 'none', level: 'warn' },
