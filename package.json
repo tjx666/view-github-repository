@@ -146,7 +146,6 @@
         "lint-staged": "^10.0.2",
         "mocha": "^7.0.1",
         "prettier": "^1.19.1",
-        "rimraf": "^3.0.0",
         "size-plugin": "^2.0.1",
         "speed-measure-webpack-plugin": "^1.3.1",
         "terser-webpack-plugin": "^2.3.2",
