@@ -11,13 +11,19 @@ compiler.run((error, stats) => {
 
     if (error) {
         console.error(error);
-
-        if (compileError.details) {
-            console.error(compileError.details);
-        }
-
+        compileError.details && console.error(compileError.details);
         return;
     }
 
-    console.log(stats.toString(isProd ? 'normal' : 'errors-only'));
+    const devStatsOpts = {
+        preset: 'minimal',
+        colors: true,
+    };
+
+    const prodStatsOpts = {
+        preset: 'normal',
+        colors: true,
+    };
+
+    console.log(stats.toString(isProd ? prodStatsOpts : devStatsOpts));
 });
