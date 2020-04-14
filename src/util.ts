@@ -73,12 +73,13 @@ export function extractModuleNames(textContent: string): string[] {
                 if (~firstSlashIndex) {
                     if (moduleName.startsWith('@')) {
                         const secondSlashIndex = moduleName.indexOf('/', firstSlashIndex + 1);
-                        if (~secondSlashIndex) return moduleName.slice(0, secondSlashIndex);
+                        if (~secondSlashIndex) {
+                            return moduleName.slice(0, secondSlashIndex);
+                        }
+                        return moduleName;
                     }
-
                     return moduleName.slice(0, firstSlashIndex);
                 }
-
                 return moduleName;
             })
             .filter((moduleName) => !moduleName.startsWith('@types/'));

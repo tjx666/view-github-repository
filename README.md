@@ -53,6 +53,11 @@ If current active editor's fileName is just `package.json`, this extension will 
 
 This command will load all the module names from package.json exists in workspace root path.
 
+### TODO
+
+- [ ] import statement is multiple lines
+- [ ] module alias
+
 ## 🧡 Backers
 
 Thanks to `JiangShiqi` for designing the extension's logo.
