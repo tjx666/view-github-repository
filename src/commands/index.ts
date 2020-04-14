@@ -1,11 +1,11 @@
-import * as vscode from 'vscode';
+import vscode from 'vscode';
 import isOnline from 'is-online';
 
 import viewActiveEditorRepository from './viewActiveEditorRepository';
 import viewPackageJSONRepository from './viewPackageJSONRepository';
 
 const commands = [viewActiveEditorRepository, viewPackageJSONRepository];
-commands.forEach(command => {
+commands.forEach((command) => {
     const { identifier, handler } = command;
     command.identifier = `viewGithubRepository.${identifier}`;
     command.handler = async function networkCheckedHandler(...args: any[]) {

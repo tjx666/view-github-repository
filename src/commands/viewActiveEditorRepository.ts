@@ -1,10 +1,16 @@
-import * as vscode from 'vscode';
+import vscode from 'vscode';
 
 import { getPackageNamesFromPackageJSON, extractModuleNames } from '../util';
 import viewGithubRepository from '../viewGithubRepository';
 
 async function handler() {
-    const supportedLanguageIds = ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue'];
+    const supportedLanguageIds = [
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'vue',
+    ];
     const activeEditor = vscode.window.activeTextEditor;
 
     if (activeEditor) {

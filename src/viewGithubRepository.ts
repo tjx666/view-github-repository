@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import vscode from 'vscode';
 import builtInModules from 'builtin-modules';
 import open from 'open';
 
@@ -10,7 +10,7 @@ export default async function viewGithubRepository(moduleNames: string | string[
     if (typeof moduleNames === 'string') {
         selectedModuleName = moduleNames;
     } else {
-        const items = moduleNames.map(moduleName => {
+        const items = moduleNames.map((moduleName) => {
             const item: vscode.QuickPickItem = { label: moduleName };
 
             if (builtInModules.includes(moduleName)) {
@@ -39,7 +39,9 @@ export default async function viewGithubRepository(moduleNames: string | string[
             if (repositoryURL) {
                 open(repositoryURL);
             } else {
-                vscode.window.showErrorMessage(`can't resolve the github repository of module ${selectedModuleName}!`);
+                vscode.window.showErrorMessage(
+                    `can't resolve the github repository of module ${selectedModuleName}!`,
+                );
             }
         }
     }

@@ -1,3 +1,13 @@
+## [1.0.7] - 2020-04-14
+
+### Changed
+
+- remove some dependencies and upgrade packages to latest
+
+### Fixed
+
+- exact module name which starts with @ should intercept before second slash
+
 ## [1.0.6] - 2020-01-26
 
 ### Changed
