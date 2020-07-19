@@ -27,7 +27,7 @@ This extension provides two commands:
    export * from 'lodash';
    ```
 
-2) use the shortcut `ctrl + shift + p` or `cmd + shift + p` on macOS to expand command panel, select one of commands you need listed above.
+2. use the shortcut <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>(Windows) or <kbd>⌘</kbd> + <kbd>shift</kbd> + <kbd>p</kbd>(macOS) to expand command panel, select one of commands you need listed above.
 
 ![view github repository of active editor](https://github.com/tjx666/view-github-repository/blob/master/images/usage.gif?raw=true)
 

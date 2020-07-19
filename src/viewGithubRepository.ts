@@ -4,7 +4,7 @@ import open from 'open';
 
 import { fetchNpmPackageRepository } from './util';
 
-export default async function viewGithubRepository(moduleNames: string | string[]) {
+export default async function viewGithubRepository(moduleNames: string | string[]): Promise<void> {
     let selectedModuleName: string | undefined;
 
     if (typeof moduleNames === 'string') {

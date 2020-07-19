@@ -8,7 +8,7 @@ import viewGithubRepository from '../viewGithubRepository';
 const isFileExists = promisify(fs.exists);
 const readFile = promisify(fs.readFile);
 
-async function handler() {
+async function handler(): Promise<void> {
     const rootPath = getRootPath();
     if (rootPath) {
         const packageJSONPath = resolve(rootPath, './package.json');

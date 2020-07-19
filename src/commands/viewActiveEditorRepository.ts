@@ -3,7 +3,7 @@ import vscode from 'vscode';
 import { getPackageNamesFromPackageJSON, extractModuleNames } from '../util';
 import viewGithubRepository from '../viewGithubRepository';
 
-async function handler() {
+async function handler(): Promise<void> {
     const supportedLanguageIds = [
         'javascript',
         'javascriptreact',
@@ -24,7 +24,7 @@ async function handler() {
         }
 
         if (moduleNames && moduleNames.length > 0) {
-            viewGithubRepository(moduleNames);
+            viewGithubRepository(moduleNames.length === 1 ? moduleNames[0] : moduleNames);
         }
     }
 }

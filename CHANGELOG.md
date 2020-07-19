@@ -1,3 +1,13 @@
+## [1.0.9] - 2020-07-19
+
+### Added
+
+- auto filter file, git and other protocol npm package
+
+### Fixed
+
+- open pick box when only one module name
+
 ## [1.0.8] - 2020-04-14
 
 ### Fixed

@@ -117,5 +117,11 @@ export function getPackageNamesFromPackageJSON(jsonTextContent: string): string[
 
     if (packageJSON.devDependencies) packageNames.push(...Object.keys(packageJSON.devDependencies));
 
-    return packageNames.filter((packageName) => !packageName.startsWith('@types/'));
+    return packageNames.filter((packageName) => {
+        return (
+            !packageName.startsWith('@types/') ||
+            packageName.includes('://') ||
+            packageName.startsWith('file:')
+        );
+    });
 }
