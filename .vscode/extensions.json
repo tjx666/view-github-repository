@@ -9,7 +9,7 @@
         "mrmlnc.vscode-scss",
         "yutengjing.view-github-repository",
         "yutengjing.open-in-external-app",
-        "yutengjing.vscode-fe-helpe"
+        "yutengjing.vscode-fe-helper"
     ],
     "unwantedRecommendations": [
         "hookyqr.beautify",

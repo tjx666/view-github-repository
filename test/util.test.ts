@@ -24,10 +24,7 @@ describe('#utils', () => {
 
         it('scoop package', async () => {
             const responseUrl = await fetchNpmPackageRepository('@babel/core');
-            strictEqual(
-                responseUrl,
-                'https://github.com/babel/babel/tree/master/packages/babel-core',
-            );
+            strictEqual(responseUrl, 'https://github.com/babel/babel');
         });
 
         it('return null when not exists package', async () => {
