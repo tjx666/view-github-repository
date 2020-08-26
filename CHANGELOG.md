@@ -1,3 +1,9 @@
+## [1.0.10] - 2020-08-26
+
+### Changed
+
+- upgrade dependencies
+
 ## [1.0.9] - 2020-07-19
 
 ### Added

@@ -1,7 +1,7 @@
 {
     "name": "view-github-repository",
     "displayName": "View GitHub Repository",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "preview": false,
     "description": "Open npm package GitHub repository straight from VScode",
     "publisher": "YuTengjing",
@@ -34,7 +34,7 @@
         "url": "https://github.com/tjx666/view-github-repository"
     },
     "engines": {
-        "vscode": "^1.46.0"
+        "vscode": "^1.48.0"
     },
     "categories": [
         "Other"
