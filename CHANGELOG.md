@@ -1,3 +1,9 @@
+## [1.0.11] - 2020-10-23
+
+### Changed
+
+- upgrade dependencies include webpack5
+
 ## [1.0.10] - 2020-08-26
 
 ### Changed
