@@ -103,7 +103,7 @@
         ]
     },
     "dependencies": {
-        "axios": "^0.20.0",
+        "axios": "^0.21.1",
         "builtin-modules": "^3.1.0",
         "is-online": "^8.5.1",
         "open": "^7.3.0",
