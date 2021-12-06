@@ -30,7 +30,14 @@ export default async function viewGithubRepository(moduleNames: string | string[
     }
 
     if (selectedModuleName) {
-        if (builtInModules.includes(selectedModuleName)) {
+        if (selectedModuleName.startsWith('@types/')) {
+            await open(
+                `https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/${selectedModuleName.replace(
+                    '@types/',
+                    '',
+                )}`,
+            );
+        } else if (builtInModules.includes(selectedModuleName)) {
             const nodeDocumentURL = `https://nodejs.org/api/${selectedModuleName}.html`;
             await open(nodeDocumentURL);
         } else {

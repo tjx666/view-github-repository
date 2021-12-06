@@ -34,7 +34,7 @@
         "url": "https://github.com/tjx666/view-github-repository"
     },
     "engines": {
-        "vscode": "^1.50.0"
+        "vscode": "^1.62.0"
     },
     "categories": [
         "Other"
@@ -67,7 +67,7 @@
         "onCommand:viewGithubRepository.viewActiveEditorRepository",
         "onCommand:viewGithubRepository.viewPackageJSONRepository"
     ],
-    "main": "./out/extension.js",
+    "main": "dist/extension.js",
     "contributes": {
         "commands": [
             {
@@ -81,73 +81,83 @@
         ]
     },
     "scripts": {
-        "vscode:prepublish": "yarn run build",
-        "compile": "cross-env NODE_ENV=development ts-node --files -P ./build/tsconfig.json ./build",
-        "test-compile": "tsc -p ./tsconfig.test.json",
-        "build": "cross-env NODE_ENV=production ts-node --files -P ./build/tsconfig.json ./build",
-        "build-analyze": "cross-env NODE_ENV=production ts-node --files -P ./build/tsconfig.json ./build --analyze",
-        "lint": "eslint -c .eslintrc --ext .ts ./{build,src,test}/**/*.ts",
-        "test": "yarn run test-compile && node ./out/test/runTests.js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+        "vscode:prepublish": "yarn build",
+        "compile": "cross-env NODE_ENV=development ts-node --files -P ./scripts/tsconfig.json ./scripts",
+        "watch": "cross-env NODE_ENV=development ts-node --files -P ./scripts/tsconfig.json ./scripts --watch",
+        "test-compile": "tsc -p ./test/tsconfig.json",
+        "watch-tests": "tsc -w -p ./test/tsconfig.json",
+        "build": "cross-env NODE_ENV=production ts-node --files -P ./scripts/tsconfig.json ./scripts",
+        "build-analyze": "yarn build --analyze",
+        "lint": "eslint -c .eslintrc.js --ext .ts ./{scripts,src,test}/**/*.ts",
+        "test": "yarn compile && yarn test-compile && node ./dist/test/runTests.js",
+        "prepare": "husky install"
     },
     "lint-staged": {
         "*.ts": [
-            "eslint -c .eslintrc"
+            "eslint -c .eslintrc.js",
+            "format-imports --config .vscode/import-sorter.json"
         ],
         "*.{ts,json,md}": [
             "prettier --write"
         ]
     },
     "dependencies": {
-        "axios": "^0.20.0",
-        "builtin-modules": "^3.1.0",
-        "is-online": "^8.5.1",
-        "open": "^7.3.0",
-        "package-json": "^6.5.0"
+        "axios": "^0.24.0",
+        "builtin-modules": "^3.2.0",
+        "is-online": "^9.0.1",
+        "open": "^8.4.0",
+        "package-json": "^7.0.0"
     },
     "devDependencies": {
-        "@types/friendly-errors-webpack-plugin": "^0.1.2",
-        "@types/fs-extra": "^9.0.2",
-        "@types/glob": "^7.1.1",
-        "@types/lodash": "^4.14.162",
-        "@types/mocha": "^8.0.3",
-        "@types/node": "^14.14.2",
-        "@types/terser-webpack-plugin": "^5.0.0",
-        "@types/vscode": "1.50.0",
-        "@types/webpack": "^4.41.23",
-        "@types/webpack-bundle-analyzer": "^3.9.0",
-        "@types/webpack-merge": "^4.1.5",
-        "@types/webpackbar": "^4.0.0",
-        "@types/yargs": "^15.0.9",
-        "@typescript-eslint/eslint-plugin": "^4.5.0",
-        "@typescript-eslint/parser": "^4.5.0",
-        "clean-webpack-plugin": "^3.0.0",
-        "cross-env": "^7.0.2",
-        "eslint": "^7.11.0",
-        "eslint-config-airbnb-base": "^14.1.0",
-        "eslint-config-prettier": "^6.14.0",
-        "eslint-plugin-import": "2.22.1",
-        "eslint-plugin-prettier": "^3.1.3",
-        "friendly-errors-webpack-plugin": "^1.7.0",
-        "glob": "^7.1.5",
-        "husky": "^4.3.0",
-        "lint-staged": "^10.4.2",
-        "mocha": "^8.2.0",
-        "prettier": "^2.1.2",
-        "speed-measure-webpack-plugin": "^1.3.3",
-        "terser-webpack-plugin": "^5.0.0",
-        "ts-loader": "^8.0.6",
-        "ts-node": "^9.0.0",
-        "typescript": "^4.0.3",
-        "vscode-test": "^1.3.0",
-        "webpack": "^5.1.3",
-        "webpack-bundle-analyzer": "^3.9.0",
-        "webpack-merge": "^5.2.0",
-        "webpackbar": "^4.0.0",
-        "yargs": "^16.1.0"
+        "@babel/parser": "^7.16.4",
+        "@nuxt/friendly-errors-webpack-plugin": "^2.5.2",
+        "@types/color": "^3.0.2",
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.0.0",
+        "@types/node": "^16.11.11",
+        "@types/pangu": "^3.3.0",
+        "@types/pluralize": "^0.0.29",
+        "@types/terser-webpack-plugin": "^5.2.0",
+        "@types/vscode": "1.62.0",
+        "@types/webpack-bundle-analyzer": "^4.4.1",
+        "@types/webpack-merge": "^5.0.0",
+        "@types/webpack": "^5.28.0",
+        "@types/webpackbar": "^4.0.2",
+        "@types/yargs": "^17.0.7",
+        "@typescript-eslint/eslint-plugin": "^5.5.0",
+        "@typescript-eslint/parser": "^5.5.0",
+        "@vscode/test-electron": "^1.6.2",
+        "clean-webpack-plugin": "^4.0.0",
+        "color": "^4.1.0",
+        "cross-env": "^7.0.3",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-import-resolver-typescript": "^2.5.0",
+        "eslint-plugin-import": "2.25.3",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-unicorn": "^39.0.0",
+        "eslint": "^8.4.0",
+        "format-imports": "^2.4.3",
+        "glob": "^7.2.0",
+        "husky": "7.0.4",
+        "jsonc-parser": "^3.0.0",
+        "lebab": "^3.1.1",
+        "lint-staged": "^12.1.2",
+        "mocha": "^9.1.3",
+        "pangu": "^4.0.7",
+        "pluralize": "^8.0.0",
+        "postcss-less": "^5.0.0",
+        "postcss-scss": "^4.0.2",
+        "postcss": "^8.4.4",
+        "prettier": "^2.5.1",
+        "recast": "^0.20.5",
+        "terser-webpack-plugin": "^5.2.5",
+        "ts-loader": "^9.2.6",
+        "ts-node": "^10.4.0",
+        "webpack-bundle-analyzer": "^4.5.0",
+        "webpack-merge": "^5.8.0",
+        "webpack": "^5.65.0",
+        "webpackbar": "^5.0.2",
+        "yargs": "^17.3.0"
     }
 }

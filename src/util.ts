@@ -52,7 +52,7 @@ export async function fetchNpmPackageRepository(moduleName: string): Promise<str
 }
 
 export function extractModuleNames(textContent: string): string[] {
-    const moduleNameRegexpSource = /("|')([^./][a-zA-Z0-9-._@/]*?)("|')/.source;
+    const moduleNameRegexpSource = /("|')([^./][\w./@-]*?)("|')/.source;
     const requireRegexp = new RegExp(`require\\(${moduleNameRegexpSource}\\)`);
     const importRegexp = new RegExp(`import\\s+.*?${moduleNameRegexpSource}`);
     const exportRegexp = new RegExp(`export\\s+.*?from\\s+${moduleNameRegexpSource}`);
@@ -81,8 +81,7 @@ export function extractModuleNames(textContent: string): string[] {
                     return moduleName.slice(0, firstSlashIndex);
                 }
                 return moduleName;
-            })
-            .filter((moduleName) => !moduleName.startsWith('@types/'));
+            });
     }
 
     return [];
@@ -117,11 +116,9 @@ export function getPackageNamesFromPackageJSON(jsonTextContent: string): string[
 
     if (packageJSON.devDependencies) packageNames.push(...Object.keys(packageJSON.devDependencies));
 
-    return packageNames.filter((packageName) => {
-        return (
-            !packageName.startsWith('@types/') ||
+    return packageNames.filter(
+        (packageName) =>
             packageName.includes('://') ||
-            packageName.startsWith('file:')
-        );
-    });
+            packageName.startsWith('file:'),
+    );
 }

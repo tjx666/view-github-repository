@@ -5,7 +5,7 @@ import viewActiveEditorRepository from './viewActiveEditorRepository';
 import viewPackageJSONRepository from './viewPackageJSONRepository';
 
 const commands = [viewActiveEditorRepository, viewPackageJSONRepository];
-commands.forEach((command) => {
+for (const command of commands) {
     const { identifier, handler } = command;
     command.identifier = `viewGithubRepository.${identifier}`;
     command.handler = async function networkCheckedHandler(...args: any[]) {
@@ -17,6 +17,6 @@ commands.forEach((command) => {
 
         await handler(...args);
     };
-});
+}
 
 export default commands;

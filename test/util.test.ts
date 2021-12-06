@@ -35,9 +35,11 @@ describe('#utils', () => {
 
     describe('#extractModuleNames', () => {
         it('should return the right moduleNames', async () => {
-            const textContent = (
-                await readFile(resolve(projectPath, './test-fixture/index.js'))
-            ).toString();
+            const textContent = await readFile(
+                resolve(projectPath, './test-fixture/index.js'),
+                'utf-8',
+            );
+
             deepStrictEqual(extractModuleNames(textContent), [
                 'path',
                 'webpack',
@@ -55,9 +57,7 @@ describe('#utils', () => {
 
     describe('#getPackageNamesFromPackageJSON', () => {
         it('should get package names that not prefixed with @types/', async () => {
-            const jsonContent = (
-                await readFile(resolve(getRootPath()!, 'package.json'))
-            ).toString();
+            const jsonContent = await readFile(resolve(getRootPath()!, 'package.json'), 'utf-8');
             const packageNames = getPackageNamesFromPackageJSON(jsonContent);
             deepStrictEqual(packageNames, ['lodash', '@babel/core', 'webpack']);
         });

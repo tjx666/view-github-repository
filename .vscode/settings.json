@@ -4,7 +4,8 @@
         "**/node_modules": true,
         "out": true,
         "test-fixture": true,
-        ".vscode-test": true
+        ".vscode-test": true,
+        "**/*.lock": true
     },
     "files.watcherExclude": {
         "**/.git/objects/**": true,
@@ -28,5 +29,9 @@
     },
     "[markdown]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cSpell.words": ["lebab", "pangu"]
 }

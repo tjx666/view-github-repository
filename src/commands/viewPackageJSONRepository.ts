@@ -15,7 +15,7 @@ async function handler(): Promise<void> {
         const isExists = await isFileExists(packageJSONPath);
 
         if (isExists) {
-            const jsonTextContent = (await readFile(packageJSONPath)).toString();
+            const jsonTextContent = await readFile(packageJSONPath, 'utf-8');
             const packageNames = getPackageNamesFromPackageJSON(jsonTextContent);
             viewGithubRepository(packageNames);
         }
