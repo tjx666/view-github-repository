@@ -1,6 +1,6 @@
-import vscode from 'vscode';
 import axios from 'axios';
 import packageJson, { FullMetadata } from 'package-json';
+import vscode from 'vscode';
 
 /**
  * get npm package infos provided by https://api-docs.npms.io/ or https://registry.npmjs.com
@@ -63,25 +63,24 @@ export function extractModuleNames(textContent: string): string[] {
     const importStatements = textContent.match(importStatementRegexp);
 
     if (importStatements) {
-        return importStatements
-            .map((importStatement) => {
-                const matchedRegexp = [requireRegexp, importRegexp, exportRegexp].find((regexp) =>
-                    regexp.test(importStatement),
-                )!;
-                const moduleName = importStatement.match(matchedRegexp)![2];
-                const firstSlashIndex = moduleName.indexOf('/');
-                if (~firstSlashIndex) {
-                    if (moduleName.startsWith('@')) {
-                        const secondSlashIndex = moduleName.indexOf('/', firstSlashIndex + 1);
-                        if (~secondSlashIndex) {
-                            return moduleName.slice(0, secondSlashIndex);
-                        }
-                        return moduleName;
+        return importStatements.map((importStatement) => {
+            const matchedRegexp = [requireRegexp, importRegexp, exportRegexp].find((regexp) =>
+                regexp.test(importStatement),
+            )!;
+            const moduleName = importStatement.match(matchedRegexp)![2];
+            const firstSlashIndex = moduleName.indexOf('/');
+            if (firstSlashIndex !== -1) {
+                if (moduleName.startsWith('@')) {
+                    const secondSlashIndex = moduleName.indexOf('/', firstSlashIndex + 1);
+                    if (secondSlashIndex !== -1) {
+                        return moduleName.slice(0, secondSlashIndex);
                     }
-                    return moduleName.slice(0, firstSlashIndex);
+                    return moduleName;
                 }
-                return moduleName;
-            });
+                return moduleName.slice(0, firstSlashIndex);
+            }
+            return moduleName;
+        });
     }
 
     return [];
@@ -116,9 +115,5 @@ export function getPackageNamesFromPackageJSON(jsonTextContent: string): string[
 
     if (packageJSON.devDependencies) packageNames.push(...Object.keys(packageJSON.devDependencies));
 
-    return packageNames.filter(
-        (packageName) =>
-            packageName.includes('://') ||
-            packageName.startsWith('file:'),
-    );
+    return packageNames;
 }

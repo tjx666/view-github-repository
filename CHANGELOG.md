@@ -1,3 +1,9 @@
+## [1.1.0] - 2020-12-07
+
+### Add
+
+- support types package
+
 ## [1.0.11] - 2020-10-23
 
 ### Changed

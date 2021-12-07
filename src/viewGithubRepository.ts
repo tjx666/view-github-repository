@@ -1,6 +1,6 @@
-import vscode from 'vscode';
 import builtInModules from 'builtin-modules';
 import open from 'open';
+import vscode from 'vscode';
 
 import { fetchNpmPackageRepository } from './util';
 
@@ -31,12 +31,11 @@ export default async function viewGithubRepository(moduleNames: string | string[
 
     if (selectedModuleName) {
         if (selectedModuleName.startsWith('@types/')) {
-            await open(
-                `https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/${selectedModuleName.replace(
-                    '@types/',
-                    '',
-                )}`,
-            );
+            const typeAddress = `https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/${selectedModuleName.replace(
+                '@types/',
+                '',
+            )}`;
+            await open(typeAddress);
         } else if (builtInModules.includes(selectedModuleName)) {
             const nodeDocumentURL = `https://nodejs.org/api/${selectedModuleName}.html`;
             await open(nodeDocumentURL);

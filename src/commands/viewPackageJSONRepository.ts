@@ -1,21 +1,25 @@
-import { resolve } from 'path';
 import fs from 'fs';
-import { promisify } from 'util';
+import fsAsync from 'fs/promises';
+import { resolve } from 'path';
 
 import { getPackageNamesFromPackageJSON, getRootPath } from '../util';
 import viewGithubRepository from '../viewGithubRepository';
 
-const isFileExists = promisify(fs.exists);
-const readFile = promisify(fs.readFile);
+function pathExists(path: string) {
+    return fsAsync
+        .access(path, fs.constants.F_OK)
+        .then(() => true)
+        .catch(() => false);
+}
 
 async function handler(): Promise<void> {
     const rootPath = getRootPath();
     if (rootPath) {
         const packageJSONPath = resolve(rootPath, './package.json');
-        const isExists = await isFileExists(packageJSONPath);
+        const isExists = await pathExists(packageJSONPath);
 
         if (isExists) {
-            const jsonTextContent = await readFile(packageJSONPath, 'utf-8');
+            const jsonTextContent = await fsAsync.readFile(packageJSONPath, 'utf-8');
             const packageNames = getPackageNamesFromPackageJSON(jsonTextContent);
             viewGithubRepository(packageNames);
         }
