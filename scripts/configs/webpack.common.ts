@@ -11,7 +11,6 @@ const commonWebpackConfig: Configuration = {
         level: 'log', // enables logging required for problem matchers
     },
     output: {
-        clean: true,
         library: {
             type: 'commonjs2',
         },

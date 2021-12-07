@@ -1,16 +1,14 @@
+import { deepStrictEqual, strictEqual } from 'assert';
+import fs from 'fs/promises';
 import { resolve } from 'path';
-import { strictEqual, deepStrictEqual } from 'assert';
-import fs from 'fs';
-import { promisify } from 'util';
 
 import {
-    fetchNpmPackageRepository,
     extractModuleNames,
-    getRootPath,
+    fetchNpmPackageRepository,
     getPackageNamesFromPackageJSON,
+    getRootPath,
 } from '../src/util';
 
-const readFile = promisify(fs.readFile);
 const projectPath = resolve(__dirname, '../../');
 
 describe('#utils', () => {
@@ -24,7 +22,7 @@ describe('#utils', () => {
 
         it('scoop package', async () => {
             const responseUrl = await fetchNpmPackageRepository('@babel/core');
-            strictEqual(responseUrl, 'https://github.com/babel/babel');
+            strictEqual(responseUrl, 'https://github.com/babel/babel.git');
         });
 
         it('return null when not exists package', async () => {
@@ -35,7 +33,7 @@ describe('#utils', () => {
 
     describe('#extractModuleNames', () => {
         it('should return the right moduleNames', async () => {
-            const textContent = await readFile(
+            const textContent = await fs.readFile(
                 resolve(projectPath, './test-fixture/index.js'),
                 'utf-8',
             );
@@ -45,6 +43,7 @@ describe('#utils', () => {
                 'webpack',
                 'lodash',
                 '@babel/core',
+                '@types/node',
             ]);
         });
     });
@@ -56,10 +55,10 @@ describe('#utils', () => {
     });
 
     describe('#getPackageNamesFromPackageJSON', () => {
-        it('should get package names that not prefixed with @types/', async () => {
-            const jsonContent = await readFile(resolve(getRootPath()!, 'package.json'), 'utf-8');
+        it('should get package names', async () => {
+            const jsonContent = await fs.readFile(resolve(getRootPath()!, 'package.json'), 'utf-8');
             const packageNames = getPackageNamesFromPackageJSON(jsonContent);
-            deepStrictEqual(packageNames, ['lodash', '@babel/core', 'webpack']);
+            deepStrictEqual(packageNames, ['lodash', '@babel/core', '@types/node', 'webpack']);
         });
     });
 });
